@@ -1,44 +1,46 @@
 import java.util.*
 
-data class Post (
-    val id : Int,
-    val ownerId : Int,
-    val fromId : Int,
-    val createdBy : Int,
-    val date : Int,
-    val text : String,
-    val replyOwnerId : Int,
-    val friendsOnly : Boolean,
-    val comments : Any,
-    val copyright : Any,
-    val likes : Any,
-    val reposts : Any,
-    val views : Any,
-    val postType : String,
-    val signerId : Int,
-    val canPin : Boolean,
-    val canDelete : Boolean,
-    val canEdit : Boolean,
-    val isPinned : Boolean,
-    val markedAsAdds : Boolean,
-    val isFavorite : Boolean,
-    val donut : Any,
-    val postponedId : Int
-        )
+data class Post(
+    var id: Int,
+    val ownerId: Int,
+    val fromId: Int,
+    val createdBy: Int,
+    val date: Int,
+    val text: String,
+    val replyOwnerId: Int,
+    val friendsOnly: Boolean,
+    val comments: Any,
+    val copyright: Any,
+    val likes: Any,
+    val reposts: Any,
+    val views: Any,
+    val postType: String,
+    val signerId: Int,
+    val canPin: Boolean,
+    val canDelete: Boolean,
+    val canEdit: Boolean,
+    val isPinned: Boolean,
+    val markedAsAdds: Boolean,
+    val isFavorite: Boolean,
+    val donut: Any,
+    val postponedId: Int,
+)
 
 class WallService {
-    private var posts = emptyArray<Post>()
-    private fun add(post: Post): Post {
+    var posts = emptyArray<Post>()
+    fun add(post: Post): Int {
         posts += post
-        return post
+        val idLastPost = if (posts.isNotEmpty()) post.copy(posts.last().id + 1) else posts.last().id = 0
+        return posts.last().id
     }
 
-    fun update (post: Post, id: Int) : Boolean {
-        for ((index, post) in posts.withIndex()) {
-            if (post.id == id) {
-                posts[index] = post.copy(text = "Bye")
+    fun update(post: Post): Boolean {
+        for ((index, postInArray) in posts.withIndex()) {
+            if (post.id == postInArray.id) {
+                posts[index] = post.copy(ownerId = postInArray.ownerId, date = postInArray.date)
+                return true
             }
         }
-        return true
+        return false
     }
 }
