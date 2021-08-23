@@ -31,7 +31,7 @@ class WallServiceTest {
             1,
             1))
 
-        assertEquals(1, result)
+        assertEquals(1, result.id)
     }
 
     @Test
