@@ -1,6 +1,13 @@
+class AudioAttachment (
+    override val type: String = "audio",
+    val audio: Audio = Audio(1, 1, "1", "1", 1, "1", 1, 1, 1, 1, noSearch = true, isHq = true)
+
+
+        ) : Attachment
+
 class Audio (
-    override val id: Int,
-    override val ownerId: Int,
+    val id: Int,
+    val ownerId: Int,
     val artist: String,
     val title: String,
     val duration: Int,
@@ -11,5 +18,5 @@ class Audio (
     val date: Int,
     val noSearch: Boolean,
     val isHq: Boolean
-        ) : Attachment(id, ownerId)
+        )
 

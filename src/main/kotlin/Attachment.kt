@@ -1,4 +1,3 @@
-abstract  class Attachment (
-    open val id: Int,
-    open val ownerId: Int
-        )
+interface Attachment {
+    val type: String
+}
