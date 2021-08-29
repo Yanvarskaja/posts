@@ -1,3 +1,4 @@
+import java.lang.RuntimeException
 import java.util.*
 
 data class Post(
@@ -27,7 +28,7 @@ data class Post(
 )
 
 class WallService {
-    var posts = emptyArray<Post>()
+    private var posts = emptyArray<Post>()
     fun add(post: Post): Post {
         posts += post
         val idLastPost = if (posts.isNotEmpty()) post.copy(posts.last().id + 1) else posts.last().id = 0
@@ -43,4 +44,20 @@ class WallService {
         }
         return false
     }
+
+    private var comments = emptyArray<Comment>()
+    fun createComment(comment: Comment): Boolean {
+        for ((index, postInArray) in posts.withIndex()) {
+            if (postInArray.id == comment.idPost) {
+                comments += comment
+                return true
+            } else {
+                throw PostNotFoundException("Поста с таким id не существует")
+
+            }
+        }
+        return false
+    }
 }
+
+class PostNotFoundException(message: String) : RuntimeException(message)

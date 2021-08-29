@@ -189,4 +189,64 @@ class WallServiceTest {
 
         assertFalse(result)
     }
+    @Test
+    fun addComment() {
+        val service = WallService()
+        service.add(Post(1,
+            1,
+            1,
+            1,
+            1,
+            "text",
+            1,
+            friendsOnly = true,
+            1,
+            1,
+            1,
+            1,
+            1,
+            "postType",
+            1,
+            canPin = true,
+            canDelete = true,
+            canEdit = true,
+            isPinned = true,
+            markedAsAdds = true,
+            isFavorite = true,
+            1,
+            1))
+       val result = service.createComment(Comment(1, 1, 1, 1, "1", 1, 1, 1, 1, 1, 1))
+        assertTrue(result)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow() {
+        // здесь код с вызовом функции, которая должна выкинуть PostNotFoundException
+        val service = WallService()
+        service.add(Post(1,
+            1,
+            1,
+            1,
+            1,
+            "text",
+            1,
+            friendsOnly = true,
+            1,
+            1,
+            1,
+            1,
+            1,
+            "postType",
+            1,
+            canPin = true,
+            canDelete = true,
+            canEdit = true,
+            isPinned = true,
+            markedAsAdds = true,
+            isFavorite = true,
+            1,
+            1))
+        val result = service.createComment(Comment(1, 1, 2, 1, "1", 1, 1, 1, 1, 1, 1))
+    }
+
 }
