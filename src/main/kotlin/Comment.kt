@@ -1,7 +1,7 @@
 import java.lang.RuntimeException
 
 class Comment (
-    val id: Int,
+    var id: Int,
     val fromId: Int,
     val idPost: Int,
     val date: Int,
